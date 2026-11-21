@@ -1,4 +1,5 @@
 import { ProjectGrid } from '@/components/ProjectGrid'
+import './experience.css'
 
 // Read the current portfolio on each visit, including the first project published after deploy.
 export const dynamic = 'force-dynamic'
@@ -10,14 +11,8 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="folio">
-      <header className="folio-intro">
-        <p className="folio-index">AK Visual &nbsp; / &nbsp; Portfolio</p>
-        <h1>
-          Projekty <i>wnętrz.</i>
-        </h1>
-      </header>
-      <ProjectGrid />
+    <main className="folio home-experience">
+      <ProjectGrid opening />
     </main>
   )
 }

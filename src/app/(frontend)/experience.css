@@ -1,0 +1,214 @@
+.folio.home-experience {
+  padding-inline: 0;
+  padding-bottom: 0;
+}
+.home-experience > .folio-intro,
+.project-index {
+  padding-inline: clamp(1.25rem, 5vw, 6rem);
+}
+.project-index {
+  --project-spacing: clamp(1rem, 2vw, 2rem);
+  padding-block: var(--project-spacing);
+}
+.project-index .folio-grid {
+  row-gap: var(--project-spacing);
+}
+.opening-scene {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 34rem;
+  min-height: max(34rem, calc(100svh - 5rem));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: #282720;
+  color: #fffaf1;
+  padding: clamp(1.25rem, 5vw, 6rem);
+  padding-bottom: clamp(1rem, 3vw, 3rem);
+}
+.opening-photo,
+.opening-scene::after {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.opening-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 54%;
+}
+.opening-photo picture {
+  display: block;
+  height: 100%;
+}
+.opening-scene::after {
+  content: '';
+  z-index: -1;
+  background: linear-gradient(
+    0deg,
+    rgba(17, 17, 14, 0.86),
+    rgba(17, 17, 14, 0.5) 42%,
+    transparent 76%
+  );
+}
+.opening-type {
+  margin-bottom: clamp(2.2rem, 6vh, 5rem);
+}
+.opening-type h1 {
+  font-size: var(--studio-display);
+  line-height: 1.1;
+  margin: 0.16em 0;
+  letter-spacing: -0.05em;
+}
+.opening-type h1 > * {
+  display: inline-block;
+}
+.opening-type h1 em {
+  color: #f3dec1;
+  font-weight: 400;
+}
+.opening-line {
+  font-size: var(--studio-body);
+}
+.opening-coverage {
+  margin-top: 0.5rem;
+  font-size: 0.92rem;
+}
+.opening-type .opening-coverage {
+  color: #f3dec1;
+}
+.opening-nav {
+  border-top: 1px solid #ffffff66;
+  padding-top: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.86rem;
+}
+.opening-nav a {
+  padding-block: 0.4rem;
+}
+.opening-nav a span {
+  display: inline-block;
+}
+.opening-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+.project-index-head h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+  line-height: 1.09;
+  font-size: var(--studio-heading);
+}
+.project-index-head {
+  display: grid;
+  gap: 1rem;
+  padding-bottom: var(--project-spacing);
+}
+.project-index .folio-caption {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.project-index .folio-card:first-child {
+  grid-column: auto;
+}
+.project-index .folio-card:first-child .folio-cover {
+  aspect-ratio: 4/3;
+}
+@media (max-width: 700px) {
+  .opening-type h1 em {
+    display: block;
+  }
+  .opening-nav > a:last-child {
+    text-align: right;
+  }
+  .opening-scene {
+    min-height: max(30rem, calc(100svh - 5rem));
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.home-experience) {
+    scroll-behavior: smooth;
+  }
+  .opening-photo-img {
+    animation: room-arrival 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .opening-scene::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 24% 22%, #ffe7ba3d, transparent 62%);
+    animation: morning-light 2.2s ease-out both;
+  }
+  .opening-type h1 > * {
+    animation: opening-rise 950ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .opening-type h1 em {
+    animation-delay: 160ms;
+  }
+  .opening-line {
+    animation: opening-rise 850ms 320ms both;
+  }
+  .opening-nav a span {
+    transition: transform 240ms ease-out;
+  }
+  .opening-nav a:first-child:is(:hover, :focus-visible) span {
+    transform: translateY(3px);
+  }
+  .opening-nav a:last-child:is(:hover, :focus-visible) span {
+    transform: translate(3px, -3px);
+  }
+  @keyframes room-arrival {
+    from {
+      transform: scale(1.055);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes morning-light {
+    from {
+      opacity: 0;
+    }
+    45% {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes opening-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.32em);
+      clip-path: inset(0 0 65% 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+      clip-path: inset(0);
+    }
+  }
+  @supports (animation-timeline: view()) {
+    .opening-scene {
+      view-timeline-name: --departure;
+    }
+    .opening-photo {
+      animation: room-drift linear both;
+      animation-timeline: --departure;
+      animation-range: exit;
+    }
+    @keyframes room-drift {
+      to {
+        transform: translateY(8%) scale(1.18);
+      }
+    }
+  }
+}

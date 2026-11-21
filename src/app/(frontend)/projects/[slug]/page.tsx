@@ -49,22 +49,24 @@ export default async function ProjectPage({ params }: Props) {
           <h2 className="folio-index">O projekcie</h2>
           <p>{project.description}</p>
         </section>
-        {project.gallery?.map(
-          ({ id, photo }, i) =>
-            typeof photo === 'object' &&
-            photo && (
-              <figure className="story-frame" key={id}>
-                <Media
-                  resource={photo}
-                  size="(min-width: 768px) 70vw, 100vw"
-                  imgClassName="w-full h-auto"
-                />
-                <figcaption className="folio-index">
-                  {project.title} &nbsp; / &nbsp; {String(i + 1).padStart(2, '0')}
-                </figcaption>
-              </figure>
-            ),
-        )}
+        <div className="story-gallery">
+          {project.gallery?.map(
+            ({ id, photo }, i) =>
+              typeof photo === 'object' &&
+              photo && (
+                <figure className="story-frame" key={id}>
+                  <Media
+                    resource={photo}
+                    size="(min-width: 701px) 45vw, 100vw"
+                    imgClassName="story-photo"
+                  />
+                  <figcaption className="folio-index">
+                    {project.title} &nbsp; / &nbsp; {String(i + 1).padStart(2, '0')}
+                  </figcaption>
+                </figure>
+              ),
+          )}
+        </div>
       </div>
       <Link className="story-back" href="/#projects">
         ← Wróć do portfolio
