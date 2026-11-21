@@ -7,6 +7,7 @@ import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
 import Link from 'next/link'
+import { contactEmail } from '@/constants/contact'
 import Image from 'next/image'
 import { CMSLink } from '@/components/Link'
 import { getCachedGlobal } from '@/utilities/getGlobals'
@@ -48,7 +49,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </Link>
             <nav aria-label="Nawigacja">
               <Link href="/#projects">Projekty</Link>
-              <a href="#kontakt">Kontakt</a>
+              <Link href="/kontakt">Kontakt</Link>
               {header.navItems?.map(({ link, id }) => (
                 <CMSLink key={id} {...link} />
               ))}
@@ -64,8 +65,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </h2>
             <p className="contact-coverage">Projektujemy na terenie całej Polski</p>
             <address className="studio-contact">
-              <a className="contact-email" href="mailto:biuro@akvisual.pl">
-                biuro@akvisual.pl
+              <a className="contact-email" href={`mailto:${contactEmail}`}>
+                {contactEmail}
               </a>
               <a className="hover:underline" href="tel:+48726453736">
                 +48 726 453 736
