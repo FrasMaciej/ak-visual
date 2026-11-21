@@ -1,0 +1,208 @@
+.studio-bar,
+.folio {
+  --ink: #292a25;
+  --paper: #f5f2ea;
+  --line: #c9c5b8;
+  background: var(--paper);
+  color: var(--ink);
+  padding-inline: clamp(1.25rem, 5vw, 6rem);
+}
+.studio-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--line);
+}
+.studio-bar nav {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.88rem;
+}
+.studio-bar nav a:hover,
+.story-back:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+.wordmark,
+.folio h1,
+.folio-caption h2,
+.story-note p {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 400;
+}
+.wordmark {
+  font-size: 1.85rem;
+  letter-spacing: -0.07em;
+}
+.wordmark em,
+.folio-intro i {
+  font-weight: 400;
+}
+.studio-foot {
+  border-top: 1px solid var(--line);
+  border-bottom: none;
+  padding-block: 2.3rem;
+}
+.folio {
+  padding-bottom: clamp(4rem, 9vw, 9rem);
+}
+.folio-intro {
+  padding-block: clamp(2rem, 4vw, 5rem) clamp(1.5rem, 3vw, 3rem);
+}
+.folio-index {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.folio h1 {
+  font-size: clamp(3rem, 8vw, 9rem);
+  letter-spacing: -0.068em;
+  line-height: 1.03;
+  margin-top: 0.5rem;
+  overflow-wrap: anywhere;
+}
+.folio-intro i {
+  color: #696953;
+}
+.folio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 5rem);
+  scroll-margin-top: 1rem;
+}
+.folio-card:first-child {
+  grid-column: 1/-1;
+}
+.folio-image {
+  overflow: hidden;
+}
+.folio-cover {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+.folio-card:first-child .folio-cover {
+  aspect-ratio: 2.12;
+  object-position: center 55%;
+}
+.folio-caption {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.folio-caption h2 {
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+.folio-action {
+  margin-left: auto;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.folio-action b {
+  display: inline-block;
+}
+.story-lead {
+  max-width: 78rem;
+  margin-inline: auto;
+}
+.story-note {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+  margin-block: clamp(3rem, 7vw, 7rem);
+}
+.story-note p {
+  font-size: clamp(1.5rem, 3.5vw, 3.3rem);
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  white-space: pre-line;
+}
+.story-frame {
+  width: min(75%, 70rem);
+  margin-block: clamp(2rem, 5vw, 5rem);
+}
+.story-frame:nth-of-type(even) {
+  margin-left: auto;
+}
+.story-frame figcaption {
+  margin-top: 0.8rem;
+}
+.story-back {
+  display: inline-block;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+.folio a:focus-visible,
+.studio-bar a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+@media (max-width: 700px) {
+  .folio-grid,
+  .story-note {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .folio-card:first-child .folio-cover {
+    aspect-ratio: 4/3;
+  }
+  .folio-caption {
+    gap: 0.6rem;
+  }
+  .story-frame {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .folio-card:first-child .folio-image,
+  .story-lead {
+    animation: unveil 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .folio-intro h1 {
+    animation: typeset 600ms ease-out both;
+  }
+  .folio-cover,
+  .folio-action b {
+    transition: transform 550ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  @media (hover: hover) {
+    .folio-card:hover .folio-cover {
+      transform: scale(1.018);
+    }
+    .folio-card:hover b {
+      transform: translate(3px, -3px);
+    }
+  }
+  @keyframes unveil {
+    from {
+      clip-path: inset(0 0 12% 0);
+      opacity: 0.6;
+    }
+    to {
+      clip-path: inset(0);
+      opacity: 1;
+    }
+  }
+  @keyframes typeset {
+    from {
+      opacity: 0.4;
+      transform: translateY(0.13em);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
