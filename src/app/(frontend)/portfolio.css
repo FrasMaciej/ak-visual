@@ -21,6 +21,14 @@
   padding-block: 1.1rem;
   border-bottom: 1px solid var(--line);
 }
+.studio-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+html:has(.studio-header) {
+  scroll-padding-top: var(--studio-header-height, 5rem);
+}
 .studio-bar nav {
   display: flex;
   align-items: center;
@@ -33,6 +41,162 @@
 .story-back:hover {
   text-decoration: underline;
   text-underline-offset: 0.3em;
+}
+.studio-bar .studio-menu {
+  display: none;
+}
+.studio-menu summary {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.studio-menu summary::-webkit-details-marker {
+  display: none;
+}
+.studio-menu-icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+.studio-menu-icon::before,
+.studio-menu-icon::after {
+  content: '';
+  position: absolute;
+  width: 0.85rem;
+  height: 1px;
+  background: currentColor;
+}
+.studio-menu-icon::before {
+  transform: translateY(-2px);
+}
+.studio-menu-icon::after {
+  transform: translateY(2px);
+}
+.studio-menu[open] .studio-menu-icon::before {
+  transform: rotate(45deg);
+}
+.studio-menu[open] .studio-menu-icon::after {
+  transform: rotate(-45deg);
+}
+.studio-bar .studio-menu[open] nav {
+  position: absolute;
+  inset: 100% 0 auto;
+  display: block;
+  gap: 0;
+  max-height: calc(100svh - 5rem);
+  overflow: auto;
+  padding: 0.45rem clamp(1.25rem, 5vw, 6rem) 1.1rem;
+  border-block: 1px solid var(--line);
+  background: var(--paper);
+  box-shadow: 0 1rem 1.75rem #292a2524;
+}
+.studio-menu nav a {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 3.15rem;
+  padding-block: 0.45rem;
+  font:
+    400 clamp(1.28rem, 5.5vw, 1.65rem)/1.15 Georgia,
+    serif;
+  letter-spacing: -0.035em;
+}
+.studio-menu nav a + a {
+  border-top: 1px solid var(--line);
+}
+.studio-menu-number,
+.studio-menu-arrow {
+  color: #655c4c;
+  font:
+    500 0.75rem/1 var(--font-geist-sans),
+    sans-serif;
+  letter-spacing: 0.04em;
+}
+.studio-menu-arrow {
+  font-size: 1rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .studio-menu-icon::before,
+  .studio-menu-icon::after {
+    transition: transform 200ms ease;
+  }
+  .studio-menu[open] nav {
+    animation: studio-menu-arrival 220ms ease-out both;
+  }
+  @keyframes studio-menu-arrival {
+    from {
+      transform: translateY(-0.4rem);
+      opacity: 0;
+    }
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+}
+.studio-menu summary:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .studio-header[data-scroll-hidden]:not(:has(.studio-menu[open], :focus-visible)) {
+    transform: translateY(-100%);
+  }
+  .studio-bar .studio-desktop-nav {
+    display: none;
+  }
+  .studio-bar .studio-menu {
+    display: block;
+  }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: no-preference) {
+  .studio-header {
+    transition: transform 240ms ease;
+  }
+}
+.studio-guide-intro {
+  margin-top: 1rem;
+  max-width: 58ch;
+  font-size: var(--studio-body);
+}
+.studio-guide-list {
+  max-width: 52rem;
+}
+.studio-guide-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding-block: 1.25rem;
+  border-block-start: 1px solid var(--line);
+}
+.studio-guide-list li > span {
+  margin-top: 0.38rem;
+}
+.studio-guide-list h2 {
+  font:
+    400 var(--studio-title)/1.2 Georgia,
+    serif;
+  letter-spacing: -0.035em;
+}
+.studio-guide-list p {
+  margin-top: 0.45rem;
+  line-height: 1.6;
+}
+.studio-guide-link {
+  display: inline-block;
+  margin-top: 1.15rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
 }
 .wordmark,
 .folio h1,

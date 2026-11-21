@@ -13,6 +13,31 @@
 .project-index .folio-grid {
   row-gap: var(--project-spacing);
 }
+.studio-introduction {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  padding: clamp(1.75rem, 4vw, 3.5rem) clamp(1.25rem, 5vw, 6rem);
+  background: #ede7db;
+}
+.studio-introduction h2 {
+  margin-top: 0.4rem;
+  font:
+    400 var(--studio-heading)/1.12 Georgia,
+    serif;
+  letter-spacing: -0.045em;
+}
+.studio-introduction > p {
+  max-width: 57ch;
+  font-size: var(--studio-body);
+  line-height: 1.65;
+}
+@media (max-width: 700px) {
+  .studio-introduction {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .opening-scene {
   position: relative;
   isolation: isolate;

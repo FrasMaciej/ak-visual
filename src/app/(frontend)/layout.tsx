@@ -6,6 +6,7 @@ import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
+import { StudioNavigation } from '@/components/StudioNavigation'
 import Link from 'next/link'
 import { contactEmail } from '@/constants/contact'
 import Image from 'next/image'
@@ -21,10 +22,7 @@ import { getServerSideURL } from '@/utilities/getURL'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
-  const [header, footer] = await Promise.all([
-    getCachedGlobal('header', 1)(),
-    getCachedGlobal('footer', 1)(),
-  ])
+  const footer = await getCachedGlobal('footer', 1)()
 
   return (
     <html className={cn(GeistSans.variable, GeistMono.variable)} lang="pl" suppressHydrationWarning>
@@ -40,20 +38,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           />
 
-          <header className="studio-bar">
+          <header className="studio-bar studio-header">
             <Link href="/" className="wordmark studio-brand">
               <Image src="/ak-visual-mark.webp" alt="" width={35} height={32} unoptimized />
               <span>
                 AK <em>Visual</em>
               </span>
             </Link>
-            <nav aria-label="Nawigacja">
-              <Link href="/#projects">Projekty</Link>
-              <Link href="/kontakt">Kontakt</Link>
-              {header.navItems?.map(({ link, id }) => (
-                <CMSLink key={id} {...link} />
-              ))}
-            </nav>
+            <StudioNavigation />
           </header>
           {children}
           <footer id="kontakt" className="studio-bar studio-foot" aria-label="Kontakt">

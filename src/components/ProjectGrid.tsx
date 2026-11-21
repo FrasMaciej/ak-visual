@@ -3,6 +3,27 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { Media } from '@/components/Media'
 
+function StudioIntroduction() {
+  return (
+    <section
+      id="o-nas"
+      tabIndex={-1}
+      className="studio-introduction"
+      aria-labelledby="studio-introduction-title"
+    >
+      <div>
+        <p className="folio-index">O nas</p>
+        <h2 id="studio-introduction-title">Poznaj AK Visual.</h2>
+      </div>
+      <p>
+        Jesteśmy architektkami: Angelika Kotowska i Anna Matuszewska. Projektujemy wnętrza, do
+        których chce się wracać. Działamy w Sieradzu i we Wrocławiu, a projekty realizujemy na
+        terenie całej Polski.
+      </p>
+    </section>
+  )
+}
+
 export async function ProjectGrid({ opening = false }: { opening?: boolean } = {}) {
   const payload = await getPayload({ config })
   const { docs } = await payload.find({
@@ -16,12 +37,15 @@ export async function ProjectGrid({ opening = false }: { opening?: boolean } = {
   })
   if (!docs.length)
     return opening ? (
-      <header className="folio-intro">
-        <p className="folio-index">AK Visual · Sieradz · Wrocław</p>
-        <h1>Projekty wnętrz.</h1>
-        <p className="opening-coverage">Projektujemy na terenie całej Polski</p>
-        <a href="#kontakt">Porozmawiajmy o Twoim wnętrzu ↗</a>
-      </header>
+      <>
+        <header className="folio-intro">
+          <p className="folio-index">AK Visual · Sieradz · Wrocław</p>
+          <h1>Projekty wnętrz.</h1>
+          <p className="opening-coverage">Projektujemy na terenie całej Polski</p>
+          <a href="#kontakt">Porozmawiajmy o Twoim wnętrzu ↗</a>
+        </header>
+        <StudioIntroduction />
+      </>
     ) : null
   const lead = docs[0]
   const cards = opening && docs.length > 1 ? docs.slice(1) : docs
@@ -50,7 +74,7 @@ export async function ProjectGrid({ opening = false }: { opening?: boolean } = {
             <p className="opening-coverage">Projektujemy na terenie całej Polski</p>
           </div>
           <div className="opening-nav">
-            <a href="#projects">
+            <a href="#o-nas">
               Przewiń <span aria-hidden="true">↓</span>
             </a>
             <Link href={`/projects/${lead.slug}`} aria-label={`Zobacz projekt: ${lead.title}`}>
@@ -59,8 +83,10 @@ export async function ProjectGrid({ opening = false }: { opening?: boolean } = {
           </div>
         </section>
       )}
+      {opening && <StudioIntroduction />}
       <section
         id="projects"
+        tabIndex={-1}
         aria-label="Wybrane projekty"
         className={opening ? 'project-index' : ''}
       >
